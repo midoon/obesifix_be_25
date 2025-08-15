@@ -1,5 +1,5 @@
-import UserRepository from "../../app/interfaces/UserRepository";
-import prisma from "../database/prismaClient";
+import UserRepository from "../../app/interfaces/UserRepository.js";
+import prisma from "../database/prismaClient.js";
 
 export default class DBUserRepository extends UserRepository {
   async create(user) {

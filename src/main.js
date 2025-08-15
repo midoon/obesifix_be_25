@@ -1,12 +1,12 @@
-import CreateUserUseCase from "./app/use_cases/UserUseCase";
-import DBUserRepository from "./infrastructure/repositories/DBUserRepository";
-import UserController from "./infrastructure/webserver/controllers/UserController";
-import userRoutes from "./infrastructure/webserver/routes/userRoutes";
-import createServer from "./infrastructure/webserver/server";
+import UserUseCase from "./app/use_cases/UserUseCase.js";
+import DBUserRepository from "./infrastructure/repositories/DBUserRepository.js";
+import UserController from "./infrastructure/webserver/controllers/UserController.js";
+import userRoutes from "./infrastructure/webserver/routes/userRoutes.js";
+import createServer from "./infrastructure/webserver/server.js";
 
 const userRepository = new DBUserRepository();
-const createUserUseCase = new CreateUserUseCase(userRepository);
-const userController = new UserController(createUserUseCase);
+const userUseCase = new UserUseCase(userRepository);
+const userController = new UserController(userUseCase);
 const routes = userRoutes(userController);
 
 const app = createServer(routes);

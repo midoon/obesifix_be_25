@@ -1,11 +1,11 @@
-import User from "../../domain/entities/User";
+import User from "../../domain/entities/User.js";
 
-export default class CreateUserUseCase {
+export default class UserUseCase {
   constructor(userRepository) {
     this.userRepository = userRepository;
   }
 
-  async execute({
+  async create({
     id,
     name,
     email,
@@ -15,6 +15,7 @@ export default class CreateUserUseCase {
     height,
     weight,
     activity,
+    picture,
     food_type,
     created_at,
     updated_at,
@@ -36,6 +37,7 @@ export default class CreateUserUseCase {
       weight,
       activity,
       food_type,
+      picture,
       created_at,
       updated_at
     );

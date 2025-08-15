@@ -9,6 +9,7 @@ export default class User {
     height,
     weight,
     activity,
+    picture,
     food_type,
     created_at,
     updated_at
@@ -22,6 +23,7 @@ export default class User {
     this.height = height;
     this.weight = weight;
     this.activity = activity;
+    this.picture = picture;
     this.food_type = food_type;
     this.created_at = created_at;
     this.updated_at = updated_at;
