@@ -18,9 +18,32 @@ export default class DBUserRepository extends UserRepository {
     });
   }
 
-  async getByEmail(email) {}
+  async getByEmail(email) {
+    const user = await prisma.user.findFirst({
+      where: {
+        email: email,
+      },
+    });
 
-  async getById(userId) {}
+    return user;
+  }
 
-  async update(userId, payload) {}
+  async getById(userId) {
+    const user = await prisma.user.findFirst({
+      where: {
+        user_id: userId,
+      },
+    });
+
+    return user;
+  }
+
+  async update(userId, payload) {
+    return await prisma.user.update({
+      where: {
+        user_id: userId,
+      },
+      data: payload,
+    });
+  }
 }

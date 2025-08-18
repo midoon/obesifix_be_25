@@ -1,5 +1,5 @@
 export default class TokenRepository {
-  async create(token) {
+  async store(token) {
     throw new Error("Method not implemented");
   }
 
