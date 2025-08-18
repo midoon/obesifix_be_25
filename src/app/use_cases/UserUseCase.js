@@ -26,6 +26,7 @@ export default class UserUseCase {
     }
 
     // create new user
+    // argumen urutannya harus sesuai dengan parameter di constructor
     const user = new User(
       id,
       name,
@@ -36,8 +37,8 @@ export default class UserUseCase {
       height,
       weight,
       activity,
-      food_type,
       picture,
+      food_type,
       created_at,
       updated_at
     );

@@ -1,18 +1,46 @@
+import { v4 } from "uuid";
+import { registerUserValidation } from "../../../infrastructure/validator/userValidation.js";
+import { encode } from "../../util/hash.js";
+
 export default class UserController {
-  constructor(userUseCase) {
+  constructor(userUseCase, configLoader) {
     this.userUseCase = userUseCase;
+    this.configLoader = configLoader;
   }
 
   createUser = async (req, res) => {
     try {
-      // nanti diedit
-      req.body.created_at = new Date();
-      req.body.updated_at = new Date();
-      req.body.picture = "imaeg";
-      const user = await this.userUseCase.create(req.body);
-      res.status(201).json(user);
+      const { error, value } = registerUserValidation(req.body);
+      if (error) {
+        // ambil semua error per field
+        const validationErrors = error.details.map((err) => ({
+          field: err.path.join("."),
+          message: err.message,
+        }));
+
+        return res.status(403).json({
+          status: false,
+          message: validationErrors,
+        });
+      }
+      const userData = value;
+
+      userData.id = v4().toString();
+      userData.password = await encode(userData.password, 10);
+      userData.created_at = new Date();
+      userData.updated_at = new Date();
+      if (!userData.picture) {
+        userData.picture = this.configLoader.DEFAULT_IMAGE_URL;
+      }
+
+      await this.userUseCase.create(userData);
+      res.status(201).send({
+        status: true,
+        statusCode: 201,
+        message: "Success register data",
+      });
     } catch (error) {
-      res.status(400).json({ error: error.message });
+      res.status(400).send({ status: false, message: error.message });
     }
   };
 }
