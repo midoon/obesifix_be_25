@@ -18,14 +18,14 @@ const configload = configLoader();
 const userRepository = new DBUserRepository();
 const tokenRepository = new DBTokenRepository();
 
-const userUseCase = new UserUseCase(userRepository);
+const userUseCase = new UserUseCase(userRepository, configload);
 const authUseCase = new AuthUseCase(
   userRepository,
   tokenRepository,
   configload
 );
 
-const userController = new UserController(userUseCase, configload);
+const userController = new UserController(userUseCase);
 const authController = new AuthController(authUseCase);
 const routes = userRoutes(userController, authController);
 
