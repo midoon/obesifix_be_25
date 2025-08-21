@@ -31,7 +31,7 @@ export default class DBUserRepository extends UserRepository {
   async getById(userId) {
     const user = await prisma.user.findFirst({
       where: {
-        user_id: userId,
+        id: userId,
       },
     });
 
@@ -41,7 +41,7 @@ export default class DBUserRepository extends UserRepository {
   async update(userId, payload) {
     return await prisma.user.update({
       where: {
-        user_id: userId,
+        id: userId,
       },
       data: payload,
     });

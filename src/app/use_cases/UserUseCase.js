@@ -66,4 +66,11 @@ export default class UserUseCase {
 
     return this.userRepository.create(user);
   }
+
+  async getUser(userId) {
+    const user = this.userRepository.getById(userId);
+    if (!user) throw new Error("User not found");
+
+    return user;
+  }
 }

@@ -13,5 +13,8 @@ export default function userRoutes(
   router.post("/refresh", authController.refresh);
   router.delete("/logout", authMiddleware.handler, authController.logout);
 
+  // user data
+  router.get("/user/:userId", authMiddleware.handler, userController.getUser);
+
   return router;
 }

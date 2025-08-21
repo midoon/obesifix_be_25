@@ -35,4 +35,21 @@ export default class UserController {
       res.status(400).send({ status: false, message: error.message });
     }
   };
+
+  getUser = async (req, res) => {
+    try {
+      const userId = req.params.userId;
+
+      const user = await this.userUseCase.getUser(userId);
+      delete user.password;
+      res.status(200).send({
+        status: true,
+        statusCode: 200,
+        message: "Success get data user",
+        data: user,
+      });
+    } catch (error) {
+      res.status(400).send({ status: false, message: error.message });
+    }
+  };
 }
