@@ -73,4 +73,8 @@ export default class UserUseCase {
 
     return user;
   }
+
+  async update(userId, payload) {
+    await this.userRepository.update(userId, payload);
+  }
 }

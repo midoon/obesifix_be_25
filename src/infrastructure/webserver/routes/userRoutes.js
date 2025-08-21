@@ -15,6 +15,11 @@ export default function userRoutes(
 
   // user data
   router.get("/user/:userId", authMiddleware.handler, userController.getUser);
+  router.put(
+    "/user/:userId",
+    authMiddleware.handler,
+    userController.updateUser
+  );
 
   return router;
 }
