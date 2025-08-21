@@ -335,7 +335,7 @@ components:
       type: apiKey
       in: header
       name: X-API-TOKEN
-      description: "Enter the token with the `Bearer: ` prefix, e.g. Bearer abcde12345"
+      description: "Enter the token with the `Bearer ` prefix, e.g. Bearer abcde12345"
     UserGoogleAuth:
       type: apiKey
       in: header

@@ -90,4 +90,11 @@ export default class AuthUseCase {
 
     return { userId, accessToken };
   }
+
+  async logout(userId) {
+    const loggedUser = await this.tokenRpository.countTokenByUserId(userId);
+    if (loggedUser !== 1) throw new Error("Unauthorized");
+
+    await this.tokenRpository.deleteToken(userId);
+  }
 }

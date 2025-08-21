@@ -63,11 +63,27 @@ export default class AuthController {
       res.status(200).send({
         status: true,
         stautsCode: 200,
-        message: "Login success",
+        message: "Refresh success",
         data: {
           userId,
           accessToken,
         },
+      });
+    } catch (error) {
+      res.status(400).send({ status: false, message: error.message });
+    }
+  };
+
+  logout = async (req, res) => {
+    try {
+      const userId = req.user.user_id; // didapatkan dari proses authmiddleware
+
+      await this.authUseCase.logout(userId);
+
+      res.status(200).send({
+        status: true,
+        stautsCode: 200,
+        message: "Logout success",
       });
     } catch (error) {
       res.status(400).send({ status: false, message: error.message });

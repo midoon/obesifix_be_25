@@ -12,6 +12,7 @@ import AuthController from "./infrastructure/webserver/controllers/AuthControlle
 import userRoutes from "./infrastructure/webserver/routes/userRoutes.js";
 import createServer from "./infrastructure/webserver/server.js";
 import { configLoader } from "./infrastructure/config/loader.js";
+import AuthMiddleware from "./infrastructure/webserver/middleware/authMiddleware.js";
 
 const configload = configLoader();
 
@@ -25,9 +26,11 @@ const authUseCase = new AuthUseCase(
   configload
 );
 
+const authMiddleware = new AuthMiddleware(tokenRepository, configload);
+
 const userController = new UserController(userUseCase);
 const authController = new AuthController(authUseCase);
-const routes = userRoutes(userController, authController);
+const routes = userRoutes(userController, authController, authMiddleware);
 
 const app = createServer(routes);
 app.listen(3000, () => console.log("server running on port 3000"));
