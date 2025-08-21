@@ -1,6 +1,6 @@
 import { v4 } from "uuid";
 import { decode } from "../../infrastructure/util/hash.js";
-import { signJwt } from "../../infrastructure/util/jwt.js";
+import { signJwt, verifyJwt } from "../../infrastructure/util/jwt.js";
 
 import Token from "../../domain/entities/Token.js";
 
@@ -58,5 +58,36 @@ export default class AuthUseCase {
     await this.tokenRpository.store(token);
 
     return { accessToken, refreshToken, userId: user.id };
+  }
+
+  async refresh({ refresh_token }) {
+    const dataRefreshToken = verifyJwt(
+      refresh_token,
+      this.configLoader.JWT_KEY
+    );
+
+    if (!dataRefreshToken.valid || dataRefreshToken.expired) {
+      throw new Error("Unauthorized");
+    }
+
+    const userId = dataRefreshToken.decoded.payload.user_id;
+    const email = dataRefreshToken.decoded.payload.email;
+
+    const loggedUser = await this.tokenRpository.countTokenByUserId(userId);
+
+    if (loggedUser !== 1) throw new Error("Unauthorized");
+
+    const dataAccessToken = {
+      user_id: userId,
+      email,
+    };
+
+    const accessToken = signJwt(
+      dataAccessToken,
+      "3d",
+      this.configLoader.JWT_KEY
+    );
+
+    return { userId, accessToken };
   }
 }
