@@ -15,9 +15,9 @@ export default class MLController {
       const { food_data } = await this.mlUseCase.preprocessImage(req.file);
       console.log(food_data);
 
-      res.status(201).send({
+      res.status(200).send({
         status: true,
-        statusCode: 201,
+        statusCode: 200,
         food_data: {
           name: food_data.name,
           serving: food_data.serving,

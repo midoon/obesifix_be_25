@@ -338,7 +338,7 @@
                           "fat": { "type": "number" },
                           "protein": { "type": "number" },
                           "carbohydrate": { "type": "number" },
-                          "keywoard": { "type": "string" },
+                          "keyword": { "type": "string" },
                           "food_category": { "type": "string" }
                         }
                       }
