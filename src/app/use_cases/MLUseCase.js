@@ -1,6 +1,9 @@
 import fetch from "node-fetch";
 import FormData from "form-data";
-import { calculateNutritionStatus } from "../../infrastructure/util/recomendationUtil.js";
+import {
+  calculateNutritionStatus,
+  recomendationToArrayConverter,
+} from "../../infrastructure/util/recomendationUtil.js";
 
 export default class MLUseCase {
   constructor(userRpository, configLoader) {
@@ -60,7 +63,10 @@ export default class MLUseCase {
       throw new Error(`ML API error: ${response.statusText}`);
     }
 
-    const result = await response.json();
+    const responseData = await response.json();
+    console.log(responseData);
+
+    const result = recomendationToArrayConverter(responseData.food_list);
 
     return result;
   }
