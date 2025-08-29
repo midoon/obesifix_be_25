@@ -11,5 +11,11 @@ export default function mlRoutes(mlController, authMiddleware) {
     mlController.classification
   );
 
+  router.get(
+    "/recomendation/:userId",
+    authMiddleware.handler,
+    mlController.recomendation
+  );
+
   return router;
 }

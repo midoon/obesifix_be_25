@@ -32,4 +32,26 @@ export default class MLController {
       res.status(400).send({ status: false, message: error.message });
     }
   };
+
+  recomendation = async (req, res) => {
+    try {
+      const userId = req.params.userId;
+      if (!userId) {
+        return res.status(403).json({
+          status: false,
+          message: "User ID is required",
+        });
+      }
+
+      const foodList = await this.mlUseCase.getRecomendations(userId);
+
+      res.status(200).send({
+        status: true,
+        statusCode: 200,
+        food_list: foodList,
+      });
+    } catch (error) {
+      res.status(400).send({ status: false, message: error.message });
+    }
+  };
 }
