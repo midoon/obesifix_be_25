@@ -11,12 +11,12 @@ import AuthController from "./infrastructure/webserver/controllers/AuthControlle
 
 import createServer from "./infrastructure/webserver/server.js";
 import { configLoader } from "./infrastructure/config/loader.js";
-import AuthMiddleware from "./infrastructure/webserver/middleware/authMiddleware.js";
 
 import userRoutes from "./infrastructure/webserver/routes/userRoutes.js";
 import mlRoutes from "./infrastructure/webserver/routes/mlRoutes.js";
 import MLController from "./infrastructure/webserver/controllers/MLController.js";
 import MLUseCase from "./app/use_cases/MLUseCase.js";
+import AuthMiddleware from "./infrastructure/webserver/middleware/authMiddleware.js";
 
 const configload = configLoader();
 
