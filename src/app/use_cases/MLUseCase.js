@@ -64,7 +64,6 @@ export default class MLUseCase {
     }
 
     const responseData = await response.json();
-    console.log(responseData);
 
     const result = recomendationToArrayConverter(responseData.food_list);
 
