@@ -29,7 +29,7 @@ export default class AuthController {
 
       res.status(200).send({
         status: true,
-        stautsCode: 200,
+        statusCode: 200,
         message: "Login success",
         data: {
           userId,
@@ -62,11 +62,10 @@ export default class AuthController {
 
       res.status(200).send({
         status: true,
-        stautsCode: 200,
+        statusCode: 200,
         message: "Refresh success",
         data: {
-          userId,
-          accessToken,
+          access_token: accessToken,
         },
       });
     } catch (error) {
@@ -82,7 +81,7 @@ export default class AuthController {
 
       res.status(200).send({
         status: true,
-        stautsCode: 200,
+        statusCode: 200,
         message: "Logout success",
       });
     } catch (error) {

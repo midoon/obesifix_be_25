@@ -44,12 +44,26 @@ export default class UserController {
       const userId = req.params.userId;
 
       const user = await this.userUseCase.getUser(userId);
+      const dataRes = {
+        user_id: user.id,
+        name: user.name,
+        email: user.email,
+        picture: user.picture,
+        age: user.age,
+        gender: user.gender,
+        height: user.height,
+        weight: user.weight,
+        activity: user.activity,
+        food_type: user.food_type,
+        created_at: user.created_at,
+        updated_at: user.updated_at,
+      };
       delete user.password;
       res.status(200).send({
         status: true,
         statusCode: 200,
         message: "Success get data user",
-        data: user,
+        data: dataRes,
       });
     } catch (error) {
       res.status(400).send({ status: false, message: error.message });
