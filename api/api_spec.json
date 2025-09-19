@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.2",
   "info": {
-    "title": "OBESIFIX 2024 BACK-END",
+    "title": "OBESIFIX 2025 BACK-END",
     "description": "Api specification for obesifix back-end. this endpoint consume from front-end",
     "version": "2.0"
   },
@@ -123,8 +123,7 @@
                     "data": {
                       "type": "object",
                       "properties": {
-                        "userId": { "type": "string" },
-                        "accessToken": { "type": "string" }
+                        "access_token": { "type": "string" }
                       }
                     }
                   }
@@ -288,10 +287,10 @@
                       "properties": {
                         "name": { "type": "string" },
                         "serving": { "type": "number" },
-                        "calorie": { "type": "number" },
-                        "fat": { "type": "number" },
-                        "protein": { "type": "number" },
-                        "carbohydrate": { "type": "number" },
+                        "total_cal": { "type": "number" },
+                        "total_fat": { "type": "number" },
+                        "total_protein": { "type": "number" },
+                        "total_carb": { "type": "number" },
                         "description": { "type": "string" }
                       }
                     }
