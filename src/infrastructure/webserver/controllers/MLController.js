@@ -19,13 +19,13 @@ export default class MLController {
         statusCode: 200,
         message: "Success classify food image",
         food_data: {
+          description: food_data.description,
           name: food_data.name,
           serving: food_data.serving,
           total_cal: food_data.total_cal,
           total_carb: food_data.total_carb,
           total_fat: food_data.total_fat,
           total_protein: food_data.total_protein,
-          description: food_data.description,
         },
       });
     } catch (error) {
